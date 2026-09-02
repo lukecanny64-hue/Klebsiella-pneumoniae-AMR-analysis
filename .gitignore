@@ -1,0 +1,14 @@
+*.fastq
+*.fastq.gz
+*.fasta
+*.fa
+*.fastg
+*.gfa
+*.sam
+*.bam
+results/
+raw/
+sra/
+__pycache__/
+.venv/
+.DS_Store
