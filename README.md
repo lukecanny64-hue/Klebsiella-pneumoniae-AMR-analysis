@@ -1,57 +1,107 @@
-# Analysis of Klebsiella pneumoniae isolates for accuqired mobile resistance genes 
+# Analysis of Klebsiella pneumoniae isolates for acquired mobile resistance genes 
 
-This project looks at reads from different isolates of Klebsiella pneumonia to assemble respecitve genomes for each isolate. By doing this, Klebsiella pneumoniae can be screened for accqiured mobile resistance genes.
+This project looks at reads from different isolates of Klebsiella pneumoniae to assemble respective genomes for each isolate. By doing this, Klebsiella pneumoniae can be screened for acquired mobile resistance genes.
 
 ## Research question: What is the antimicrobial resistance gene repertoire of Klebsiella pneumoniae, and do resistance genes co-occur non-randomly across isolates?
 
-Klebsiella pneumoniae antimicrobial resistance is a major global health threat driven by Extended-Spectrum Beta-Lactamases (ESBLs), Carbapenem-Resistant strains (CRKP), and active efflux pumps. These resistance mechanisms are conferred by resistance genes, which Klebseialla pnuemoniae easily collects and shares via plasmids. By screening isolates for acquired mobile resistance genes, and seeing whether some genes usually co-occur, we can understand how resistance genes are linked, which informs surveillance and treatment considerations.
+Klebsiella pneumoniae antimicrobial resistance is a major global health threat driven by Extended-Spectrum Beta-Lactamases (ESBLs), Carbapenem-Resistant strains (CRKP), and active efflux pumps. These resistance mechanisms are conferred by resistance genes, which Klebsiella pneumoniae easily collects and shares via plasmids. By screening isolates for acquired mobile resistance genes, and seeing whether some genes usually co-occur, we can understand how resistance genes are linked, which informs surveillance and treatment considerations.
 
 ## Data
-[BioProject PRJDB40056, selection criteria, the selection bias, n and exclusions]
+Reads were sourced from BioProject PRJDB40056 (NCBI SRA), which collected carbapenemase-carrying Enterobacterales isolates through a nationwide surveillance in Japan in 2023. Isolates were selected via the SRA Run Selector, filtering for organism: Klebsiella pneumoniae subsp. pneumoniae, Carbapenemase gene status: Positive, and Sequencing type: Illumina paired-end whole-genome.
+
+These isolates were then quickly checked for coverage (~50-100x) and suitable average spot lengths. If isolates passed this criteria, they were added to accessions.txt.
+
+20 isolates were initially chosen for the pipeline, however one (DRR898354) accession was removed after QC checks, due to poor quality metrics. This meant 19 isolates were used for the final analysis.
 
 ## Pipeline / Methods
-The reads for this pipeline were taken from BioProject 'PRJDB40056' on the NCBI website. First the SRA run selector was used, filtering for: Organism; Klebsiella pneumoniae subsp. pneumoniae, Carbapenemase gene-carrying; Positive. Then certain statistics like coverage and read length were used to determine suitability of the reads. If an isolate passed these checks, their DRR was added to accessions.txt, for analysis. This process was repeated until 20 isolates had been added to accessions.txt.
-
 Isolates were downloaded using the SRA-toolkit. prefetch was used to obtain sra data for each DRR accession, then fasterq-dump was used to extract fastq files for each isolate. This was done using download.sh. This gave a forward read and reverse read fastq file for each isolate.
 
 Every fastq file was passed into fastqc to give 2 fastqc reports per isolate (forward and reverse read). These reports were passed into multiqc to give a clearer overview of fastq quality statistics. Accession DRR898354 was removed from downstream analysis, as it had unsuitable quality metrics, whereas DRR898355 was kept although it showed mild sequence duplication because it is expected with WGS. This left 19 isolates. The rest of the isolates showed good quality metrics, except for adapter content, which was bad in a large number of isolates. All 19 isolates were passed through trimmomatic (using trim.sh), with parameters ILLUMINACLIP (TruSeq3-PE), SLIDINGWINDOW:4:15 and MINLEN:36. Every isolate had the same trimming parameters applied, even if they showed good adapter content in multiqc, to keep all processes consistent. After trimming, all forward and reverse paired reads were passed into fastqc and then multiqc again. The results showed that all the quality metrics had stayed the same, barring adapter content, which was of good quality for all reads.
 
-Next, the trimmed fastq files passed into 'spades' (run with --isolate), which assembles unambiguous contigs from the reads. These contigs were analysed using 'quast', with metrics assessed on contigs ≥1000 bp. Most reads had an N50 between 100-250 kb, with the overall range being ~82-250. Total length ranged ~5.3-5.5 mb across the isolates, showing nearly the entire genome was recovered. GC content ranged ~56.8–57.3%, showing GC content stayed relatively consistent. Two isolates (DRR898376 and DRR898377) were more fragmented (N50 ~82-86 kb) but were retained, as resistance gene detection depends on genes lying within individual contigs rather than on overall assembly contiguity.
+Next, the trimmed fastq files were passed into 'spades' (run with --isolate), which assembles unambiguous contigs from the reads. These contigs were analysed using 'quast', with metrics assessed on contigs ≥1000 bp. Most isolates had an N50 between 100-250 kb, with the overall range being ~82-250 kb. Total length ranged ~5.3-5.5 mb across the isolates, showing nearly the entire genome was recovered. GC content ranged ~56.8–57.3%, showing GC content stayed relatively consistent. Two isolates (DRR898376 and DRR898377) were more fragmented (N50 ~82-86 kb) but were retained, as resistance gene detection depends on genes lying within individual contigs rather than on overall assembly contiguity.
 
-The AMRFinderPlus was run on each accession's contigs.fasta file, which includes nearly all contigs generated by SPAdes (excluding very small contigs). The '--organism Klebsiella_pneumoniae' and '--plus' arguments were used; --organism enables K. pneumoniae-specific point-mutation detection, and --plus included biocide and stress resistance genes alongside the normal antimicrobial resistance (AMR) genes. This produced a tsv file for each accession, containing each AMR or stress gene, along with associated metadata.
+AMRFinderPlus was run on each accession's contigs.fasta file, which includes nearly all contigs generated by SPAdes (excluding very small contigs). The '--organism Klebsiella_pneumoniae' and '--plus' arguments were used; --organism enables K. pneumoniae-specific point-mutation detection, and --plus includes biocide and stress resistance genes alongside the normal antimicrobial resistance (AMR) genes. This produced a tsv file for each accession, containing each AMR or stress gene, along with associated metadata.
 
 ## Analysis
-The first descision I made after exploring the data was choosing to aggregate at the class-level, instead of at the individuals gene level. This was because with only 19 isolates, there was simply not enough genes and variation of genes, to do a meaningful analysis. For example, 37 genes appeared only in one or two isolates, making them quite rare, and therefore they did not provide much information for analysing coocurrence.
+The first decision I made after exploring the data was choosing to aggregate at the class level, instead of at the individual gene level. This was because with only 19 isolates, there were simply not enough genes, and variation of genes, to do a meaningful analysis. For example, 37 genes appeared in only one or two isolates, making them quite rare, and therefore they did not provide much information for analysing co-occurrence.
 
-Next, genes that conferred resistance to multiple classes, were separated into indivudal classes, making the analysis easier to write, while accurately reflecting the biology. For example, if a gene had resistance class 'COPPER/SILVER', it would be split into two separate rows: 'COPPER' and 'SILVER'.
+Next, genes that conferred resistance to multiple classes were separated into individual classes, making the analysis easier to write, while accurately reflecting the biology. For example, if a gene had resistance class 'COPPER/SILVER', it would be split into two separate rows: 'COPPER' and 'SILVER'.
 
-This analysis focuses on acquired mobile resistance genes, so resistance genes that arise from point muations were removed from the datatset, as these are located on the chromosome. The relationship between accquired vs mutational could be an area of further research, which I discuss in 'Further work'.
+This analysis focuses on acquired mobile resistance genes, so resistance genes that arise from point mutations were removed from the dataset, as most of these are located on the chromosome (this point is addressed in 'Limitations'). The relationship between acquired vs mutational resistance could be an area of further research, which I discuss in 'Further work'.
 
-I constructed an isolate x class matrix, where class was a binary category. I used this present or not present approach because it was more robust at n=19, rather than comparing the count of genes that occured together. If more isolates were used, analysing coocurrence using the latter method, would have be much more informative and powerful, again, something for future work.
+An isolate x class matrix was constructed, where class took binary values. The present or not present approach was used because it was more robust at n=19, rather than comparing the count of genes that occurred together. If more isolates were used, analysing co-occurrence using the latter method would have been much more informative and powerful, something for future work.
 
+A heatmap was made, showing the per-class prevalence and per-isolate burden. This heatmap showed that some classes appeared in every isolate, meaning these classes contributed no information for the co-occurrence analysis, as their variance was zero. Similarly, some classes appeared very few times, which offered very little statistical power. These were key findings for the later analysis.
+
+Some classes were filtered out using lower and upper thresholds, due to them not adding much statistical power, and potentially giving misleading results. For example, if two classes only appeared once, but appeared together, it would seem they co-occur 100% of the time. This could be true, but with a small sample to pull from, we cannot accurately state this. The lower and upper thresholds can be changed; the final results' filenames state the bounds at the end.
+
+Fisher's exact test was used to determine whether each pair is due to random chance or not, as it was a small sample size. Benjamini-Hochberg was then used post-hoc to correct for any potential false positives.
+
+Finally, the analysis was redone, excluding DRR898376 and DRR898377, as these were more fragmented. This also showed whether the findings were robust, and not dependent on analytical choices.
 
 
 ## Results
-[Descriptive core + the one robust co-occurrence finding, with figures]
+Descriptive results from the class heatmap showed that many classes were in every isolate. This is most likely due to selecting isolates with carbapenemase genes. Antibiotic resistance genes tend to cluster together on plasmids, so by having carbapenemase genes present, the likelihood of other antibiotic resistance being present was much higher. This result meant these classes did not add any information to the co-occurrence analysis, as their variance was 0. Alternatively, some classes were present in only a few isolates, meaning they did not add much statistical power to the analysis. Due to this, classes at both the high and low end were cut from the later analysis.
+
+Final results varied depending on the threshold provided and the isolates included. The analysis containing all isolates, and a threshold of 2 < x < 16 (where x is the number of isolates a class is present in) had two significant pairs: Nitrofuran x Tetracycline, which were more likely to co-occur together, and Arsenic x Nickel, which were less likely to co-occur together. However, if the threshold was changed to 3 < x < 15, the Nickel class was removed from the analysis, as it only appeared 3 times, meaning the Arsenic x Nickel result was not significant. This difference showed that the Arsenic x Nickel finding was not robust, whereas the Nitrofuran x Tetracycline result was, as it remained unchanged. The exact same pattern occurred when removing DRR898376 and DRR898377 from the analysis due to fragmentation, reiterating that Nitrofuran x Tetracycline was the only robust finding in this analysis. This pairing is likely due to tetracycline resistance genes and nitrofuran determinants being carried together on plasmids, so when horizontal gene transfer occurs, bacteria acquire resistance to both antibiotics.
 
 ## Limitations
-[Selection bias, small n, threshold sensitivity, assembly quality, short-read limits]
+The largest limitation of this analysis was the small sample size (n=19). Due to the small sample size, a lot of the class counts sat very close to the threshold, meaning the results were quite fragile to altering the thresholds. It also meant a lot of the classes either did not appear enough to have a strong signal in the co-occurrence analysis, or they appeared too much, giving no or very little information for co-occurrence.
+
+Another limitation, relating to the sample size, is analysing at the class level instead of the gene level. The analysis is not as high resolution as hoped, so there could be hidden co-occurrences happening at the gene level that are not shown by this analysis. If more isolates were used, this limitation could be amended.
+
+Another limitation was the two slightly fragmented isolates. Although the contigs were not unusable, there is a chance that some genes that were present could have been missed, therefore the results wouldn't represent the true biology. However, this is why two analyses were done: to check whether the results were robust, and not dependent on the fragmented isolates.
+
+This analysis does not include point mutations, as this was out of scope, but there could be co-occurrences between mobile genetic elements and chromosomal mutations that are not shown here, which would be useful to know for surveillance and treatment considerations. Furthermore, the analysis filtered by not including point mutations, but that does not necessarily mean this removed only chromosomal mutations. It is possible that a point mutation on a plasmid could confer resistance, and therefore mobile elements could have been removed from the analysis, even if it is a small chance, which is antithetical to the aim of the analysis.
 
 ## Further work
-[Larger cohort, acquired-vs-mutational question, long reads]
+To add to this work in the future, more isolates would be used. As discussed, this would give a lot more statistical power to report on co-occurrences, as well as allowing gene-level co-occurrences to be analysed.
+
+Acquired and mutational resistance would also be the natural progression for this work, comparing any co-occurrence patterns between them. This would give more information on which resistance mechanisms typically occur together in bacteria, which is important for surveillance and treatment considerations.
 
 ## Reproducing this analysis
-[How to run it from the accession list]
+
+### Environments
+The pipeline uses separate conda environments (created via Miniforge):
+
+| Environment | Key tools |
+|-------------|-----------|
+| download    | sra-tools |
+| qc          | fastqc 0.12.1, trimmomatic 0.41, multiqc |
+| assembly    | spades 4.3.0 |
+| quast       | quast 5.3.0 |
+| screening   | ncbi-amrfinderplus 4.2.7 |
+| analysis    | pandas, scipy, statsmodels, seaborn, matplotlib |
+
+### Running the pipeline
+Accessions are in `data/metadata/accessions.txt`. Run each stage in order,
+activating the relevant environment:
+
+    conda activate download   && bash scripts/download.sh
+    conda activate qc         && bash scripts/trim.sh
+    conda activate assembly   && bash scripts/assemble.sh
+    conda activate quast      && bash scripts/quast.sh
+    conda activate screening  && bash scripts/screen.sh
+
+Then run the notebook in `analysis/` to reproduce the matrices, statistics,
+and figures.
+
 
 ## Repository structure
 
     kpneumoniae_amr/
-        ├── data/         metadata, raw, sra
-        ├── results/      amr, assemblies, fastqc_raw, fastqc_trimmed, multiqc_raw, multiqc_trimmed, quast, trimmed
-        ├── analysis/     plots, pandas.ipynb
-        └── scripts/      assembly.sh, download.sh, screening.sh, trim.sh
-
-
-
-
-
+        ├── data/
+        │   ├── metadata/     accessions.txt, isolates.csv    [committed]
+        │   ├── raw/          FASTQ reads                     [gitignored]
+        │   └── sra/          prefetch downloads              [gitignored]
+        ├── results/
+        │   ├── amr/          AMRFinderPlus TSVs              [committed]
+        │   ├── quast/        QUAST reports                   [committed]
+        │   ├── fastqc_raw/, fastqc_trimmed/                  [committed]
+        │   ├── multiqc_raw/, multiqc_trimmed/               [committed]
+        │   ├── trimmed/      trimmed reads                   [gitignored]
+        │   └── assemblies/   SPAdes output                   [gitignored]
+        ├── analysis/
+        │   ├── pandas.ipynb  analysis notebook               [committed]
+        │   └── plots/        figures                         [committed]
+        └── scripts/          assembly.sh, download.sh, screening.sh, trim.sh [committed]

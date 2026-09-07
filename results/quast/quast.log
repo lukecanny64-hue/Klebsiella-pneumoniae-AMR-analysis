@@ -1,0 +1,193 @@
+/Users/cannyl/miniforge3/envs/quast/bin/quast.py results/assemblies/DRR898355/contigs.fasta results/assemblies/DRR898359/contigs.fasta results/assemblies/DRR898360/contigs.fasta results/assemblies/DRR898362/contigs.fasta results/assemblies/DRR898363/contigs.fasta results/assemblies/DRR898364/contigs.fasta results/assemblies/DRR898365/contigs.fasta results/assemblies/DRR898366/contigs.fasta results/assemblies/DRR898368/contigs.fasta results/assemblies/DRR898372/contigs.fasta results/assemblies/DRR898376/contigs.fasta results/assemblies/DRR898377/contigs.fasta results/assemblies/DRR898379/contigs.fasta results/assemblies/DRR898407/contigs.fasta results/assemblies/DRR898409/contigs.fasta results/assemblies/DRR898410/contigs.fasta results/assemblies/DRR898411/contigs.fasta results/assemblies/DRR898421/contigs.fasta results/assemblies/DRR898438/contigs.fasta -o results/quast
+
+Version: 5.3.0
+
+System information:
+  OS: macOS-26.5.2-x86_64-i386-64bit-Mach-O (macosx)
+  Python version: 3.13.14
+  CPUs number: 12
+
+Started: 2026-08-11 19:45:54
+
+Logging to /Users/cannyl/kpneumoniae_amr/results/quast/quast.log
+NOTICE: Maximum number of threads is set to 3 (use --threads option to set it manually)
+WARNING: Maximum number of threads is reset to 1 to prevent the crash due to a known bug when using multi-threading in Python 3.8+ on macOS! For multi-threading please downgrade your Python to 3.7. Sorry for the inconvenience! Please find more details in https://github.com/ablab/quast/issues/175
+
+CWD: /Users/cannyl/kpneumoniae_amr
+Main parameters: 
+  MODE: default, threads: 1, min contig length: 500, min alignment length: 65, min alignment IDY: 95.0, \
+  ambiguity: one, min local misassembly length: 200, min extensive misassembly length: 1000
+
+Contigs:
+  Pre-processing...
+  1  results/assemblies/DRR898355/contigs.fasta ==> DRR898355_contigs
+  2  results/assemblies/DRR898359/contigs.fasta ==> DRR898359_contigs
+  3  results/assemblies/DRR898360/contigs.fasta ==> DRR898360_contigs
+  4  results/assemblies/DRR898362/contigs.fasta ==> DRR898362_contigs
+  5  results/assemblies/DRR898363/contigs.fasta ==> DRR898363_contigs
+  6  results/assemblies/DRR898364/contigs.fasta ==> DRR898364_contigs
+  7  results/assemblies/DRR898365/contigs.fasta ==> DRR898365_contigs
+  8  results/assemblies/DRR898366/contigs.fasta ==> DRR898366_contigs
+  9  results/assemblies/DRR898368/contigs.fasta ==> DRR898368_contigs
+  10 results/assemblies/DRR898372/contigs.fasta ==> DRR898372_contigs
+  11 results/assemblies/DRR898376/contigs.fasta ==> DRR898376_contigs
+  12 results/assemblies/DRR898377/contigs.fasta ==> DRR898377_contigs
+  13 results/assemblies/DRR898379/contigs.fasta ==> DRR898379_contigs
+  14 results/assemblies/DRR898407/contigs.fasta ==> DRR898407_contigs
+  15 results/assemblies/DRR898409/contigs.fasta ==> DRR898409_contigs
+  16 results/assemblies/DRR898410/contigs.fasta ==> DRR898410_contigs
+  17 results/assemblies/DRR898411/contigs.fasta ==> DRR898411_contigs
+  18 results/assemblies/DRR898421/contigs.fasta ==> DRR898421_contigs
+  19 results/assemblies/DRR898438/contigs.fasta ==> DRR898438_contigs
+
+2026-08-11 19:45:58
+Running Basic statistics processor...
+  Contig files: 
+    1  DRR898355_contigs
+    2  DRR898359_contigs
+    3  DRR898360_contigs
+    4  DRR898362_contigs
+    5  DRR898363_contigs
+    6  DRR898364_contigs
+    7  DRR898365_contigs
+    8  DRR898366_contigs
+    9  DRR898368_contigs
+    10 DRR898372_contigs
+    11 DRR898376_contigs
+    12 DRR898377_contigs
+    13 DRR898379_contigs
+    14 DRR898407_contigs
+    15 DRR898409_contigs
+    16 DRR898410_contigs
+    17 DRR898411_contigs
+    18 DRR898421_contigs
+    19 DRR898438_contigs
+  Calculating N50 and L50...
+    1  DRR898355_contigs, N50 = 182716, L50 = 10, auN = 242625.2, Total length = 5671022, GC % = 57.13, # N's per 100 kbp =  0.00
+    2  DRR898359_contigs, N50 = 165345, L50 = 11, auN = 197856.2, Total length = 5524545, GC % = 57.26, # N's per 100 kbp =  0.00
+    3  DRR898360_contigs, N50 = 240738, L50 = 7, auN = 336563.1, Total length = 5533774, GC % = 57.26, # N's per 100 kbp =  0.00
+    4  DRR898362_contigs, N50 = 203958, L50 = 8, auN = 261933.6, Total length = 5543151, GC % = 57.22, # N's per 100 kbp =  0.00
+    5  DRR898363_contigs, N50 = 250626, L50 = 8, auN = 261018.6, Total length = 5525403, GC % = 57.19, # N's per 100 kbp =  0.00
+    6  DRR898364_contigs, N50 = 202822, L50 = 7, auN = 377007.0, Total length = 5525817, GC % = 57.18, # N's per 100 kbp =  0.00
+    7  DRR898365_contigs, N50 = 251853, L50 = 6, auN = 364428.2, Total length = 5530169, GC % = 57.18, # N's per 100 kbp =  0.00
+    8  DRR898366_contigs, N50 = 195821, L50 = 10, auN = 203144.4, Total length = 5525294, GC % = 57.18, # N's per 100 kbp =  0.00
+    9  DRR898368_contigs, N50 = 195487, L50 = 11, auN = 188639.9, Total length = 5512105, GC % = 57.20, # N's per 100 kbp =  0.00
+    10 DRR898372_contigs, N50 = 240900, L50 = 9, auN = 243620.2, Total length = 5512930, GC % = 57.20, # N's per 100 kbp =  0.00
+    11 DRR898376_contigs, N50 = 85721, L50 = 20, auN = 111014.3, Total length = 5288690, GC % = 57.17, # N's per 100 kbp =  0.00
+    12 DRR898377_contigs, N50 = 81964, L50 = 22, auN = 90578.8, Total length = 5273074, GC % = 57.23, # N's per 100 kbp =  0.00
+    13 DRR898379_contigs, N50 = 193682, L50 = 6, auN = 466874.2, Total length = 5521449, GC % = 57.19, # N's per 100 kbp =  0.00
+    14 DRR898407_contigs, N50 = 103176, L50 = 17, auN = 137379.4, Total length = 5527621, GC % = 57.21, # N's per 100 kbp =  0.00
+    15 DRR898409_contigs, N50 = 225308, L50 = 9, auN = 229917.8, Total length = 5779716, GC % = 57.01, # N's per 100 kbp =  0.00
+    16 DRR898410_contigs, N50 = 172660, L50 = 10, auN = 214499.2, Total length = 5530853, GC % = 57.15, # N's per 100 kbp =  0.00
+    17 DRR898411_contigs, N50 = 119304, L50 = 17, auN = 123562.6, Total length = 5615550, GC % = 57.13, # N's per 100 kbp =  0.00
+    18 DRR898421_contigs, N50 = 138738, L50 = 14, auN = 143564.3, Total length = 5603679, GC % = 57.09, # N's per 100 kbp =  0.00
+    19 DRR898438_contigs, N50 = 120647, L50 = 15, auN = 160141.6, Total length = 5981391, GC % = 56.83, # N's per 100 kbp =  0.00
+  Drawing Nx plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/Nx_plot.pdf
+  Drawing cumulative plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/GC_content_plot.pdf
+  Drawing DRR898355_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898355_contigs_GC_content_plot.pdf
+  Drawing DRR898359_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898359_contigs_GC_content_plot.pdf
+  Drawing DRR898360_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898360_contigs_GC_content_plot.pdf
+  Drawing DRR898362_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898362_contigs_GC_content_plot.pdf
+  Drawing DRR898363_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898363_contigs_GC_content_plot.pdf
+  Drawing DRR898364_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898364_contigs_GC_content_plot.pdf
+  Drawing DRR898365_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898365_contigs_GC_content_plot.pdf
+  Drawing DRR898366_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898366_contigs_GC_content_plot.pdf
+  Drawing DRR898368_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898368_contigs_GC_content_plot.pdf
+  Drawing DRR898372_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898372_contigs_GC_content_plot.pdf
+  Drawing DRR898376_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898376_contigs_GC_content_plot.pdf
+  Drawing DRR898377_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898377_contigs_GC_content_plot.pdf
+  Drawing DRR898379_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898379_contigs_GC_content_plot.pdf
+  Drawing DRR898407_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898407_contigs_GC_content_plot.pdf
+  Drawing DRR898409_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898409_contigs_GC_content_plot.pdf
+  Drawing DRR898410_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898410_contigs_GC_content_plot.pdf
+  Drawing DRR898411_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898411_contigs_GC_content_plot.pdf
+  Drawing DRR898421_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898421_contigs_GC_content_plot.pdf
+  Drawing DRR898438_contigs GC content plot...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898438_contigs_GC_content_plot.pdf
+  Drawing Coverage histogram (bin size: 1x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/coverage_histogram.pdf
+  Drawing DRR898355_contigs coverage histogram (bin size: 10x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898355_contigs_coverage_histogram.pdf
+  Drawing DRR898359_contigs coverage histogram (bin size: 2x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898359_contigs_coverage_histogram.pdf
+  Drawing DRR898360_contigs coverage histogram (bin size: 7x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898360_contigs_coverage_histogram.pdf
+  Drawing DRR898362_contigs coverage histogram (bin size: 3x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898362_contigs_coverage_histogram.pdf
+  Drawing DRR898363_contigs coverage histogram (bin size: 6x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898363_contigs_coverage_histogram.pdf
+  Drawing DRR898364_contigs coverage histogram (bin size: 8x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898364_contigs_coverage_histogram.pdf
+  Drawing DRR898365_contigs coverage histogram (bin size: 5x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898365_contigs_coverage_histogram.pdf
+  Drawing DRR898366_contigs coverage histogram (bin size: 6x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898366_contigs_coverage_histogram.pdf
+  Drawing DRR898368_contigs coverage histogram (bin size: 6x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898368_contigs_coverage_histogram.pdf
+  Drawing DRR898372_contigs coverage histogram (bin size: 6x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898372_contigs_coverage_histogram.pdf
+  Drawing DRR898376_contigs coverage histogram (bin size: 2x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898376_contigs_coverage_histogram.pdf
+  Drawing DRR898377_contigs coverage histogram (bin size: 3x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898377_contigs_coverage_histogram.pdf
+  Drawing DRR898379_contigs coverage histogram (bin size: 11x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898379_contigs_coverage_histogram.pdf
+  Drawing DRR898407_contigs coverage histogram (bin size: 4x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898407_contigs_coverage_histogram.pdf
+  Drawing DRR898409_contigs coverage histogram (bin size: 4x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898409_contigs_coverage_histogram.pdf
+  Drawing DRR898410_contigs coverage histogram (bin size: 6x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898410_contigs_coverage_histogram.pdf
+  Drawing DRR898411_contigs coverage histogram (bin size: 1x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898411_contigs_coverage_histogram.pdf
+  Drawing DRR898421_contigs coverage histogram (bin size: 3x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898421_contigs_coverage_histogram.pdf
+  Drawing DRR898438_contigs coverage histogram (bin size: 3x)...
+    saved to /Users/cannyl/kpneumoniae_amr/results/quast/basic_stats/DRR898438_contigs_coverage_histogram.pdf
+Done.
+
+NOTICE: Genes are not predicted by default. Use --gene-finding or --glimmer option to enable it.
+
+2026-08-11 19:46:08
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating PDF with all tables and plots...
+  2 of 2: Creating Icarus viewers...
+Done
+
+2026-08-11 19:46:10
+RESULTS:
+  Text versions of total report are saved to /Users/cannyl/kpneumoniae_amr/results/quast/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /Users/cannyl/kpneumoniae_amr/results/quast/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) is saved to /Users/cannyl/kpneumoniae_amr/results/quast/report.html
+  PDF version (tables and plots) is saved to /Users/cannyl/kpneumoniae_amr/results/quast/report.pdf
+  Icarus (contig browser) is saved to /Users/cannyl/kpneumoniae_amr/results/quast/icarus.html
+  Log is saved to /Users/cannyl/kpneumoniae_amr/results/quast/quast.log
+
+Finished: 2026-08-11 19:46:10
+Elapsed time: 0:00:16.017938
+NOTICEs: 2; WARNINGs: 1; non-fatal ERRORs: 0
+
+Thank you for using QUAST!

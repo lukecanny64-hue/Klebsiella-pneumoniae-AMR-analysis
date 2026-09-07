@@ -6,9 +6,12 @@
 *.gfa
 *.sam
 *.bam
-results/
+results/assemblies/
+results/raw/
 raw/
 sra/
+data/raw/
+data/sra/
 __pycache__/
 .venv/
 .DS_Store
